@@ -1,6 +1,9 @@
 from django.conf.urls import patterns, include, url
-
 from django.contrib import admin
+from django.views.generic.base import RedirectView
+
+from radar.urls import urlpatterns as radar_urlpatterns
+
 
 admin.autodiscover()
 
@@ -13,5 +16,8 @@ urlpatterns = patterns('',
                        # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
                        # Uncomment the next line to enable the admin:
+                       url(r'^$', RedirectView.as_view(url='radar/'), name='redirect_to_radar'),
                        url(r'^admin/', include(admin.site.urls)),
 )
+
+urlpatterns += radar_urlpatterns
